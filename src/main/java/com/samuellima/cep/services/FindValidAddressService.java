@@ -20,6 +20,10 @@ public class FindValidAddressService {
         try {
             return provider.getAddress(cep);
         } catch (AddressNotFoundException exception) {
+            if (cep.equals("00000000")) {
+                return null;
+            }
+
             var newCepToTry = findPreviousCep(cep);
 
             return find(newCepToTry);
